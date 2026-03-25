@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import io from "socket.io-client";
 import "./App.css";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://real-time-whiteboard-vbb7.onrender.com");
 
 function App() {
   const canvasRef = useRef(null);
