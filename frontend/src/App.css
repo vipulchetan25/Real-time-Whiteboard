@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #0f172a;
+}
+
+/* Join */
+.join {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  color: white;
+}
+
+.join input {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+}
+
+.join button {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #3b82f6;
+  color: white;
+}
+
+/* Toolbar */
+.toolbar {
+  height: 90px;
+  background: #1e293b;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.controls button {
+  background: #334155;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+/* Canvas */
+.canvas {
+  background: #ffffff;
+  cursor: crosshair;
+  display: block;
+}
