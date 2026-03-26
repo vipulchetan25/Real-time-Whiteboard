@@ -26,24 +26,7 @@ function App() {
   };
 
   // Setup canvas
-  useEffect(() => {
-    if (!joined) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - 90;
-
-    socket.on("canvas-update", ({ strokes }) => {
-      setStrokes(strokes);
-    });
-
-    return () => socket.off("canvas-update");
-  }, [joined]);
-
-  // Redraw
-useEffect(() => {
+ useEffect(() => {
   if (!joined) return;
 
   const canvas = canvasRef.current;
@@ -57,8 +40,22 @@ useEffect(() => {
   });
 
   return () => socket.off("canvas-update");
-}, [joined]); // ✅ FIXED;
+}, [joined]); // ✅ FIXED
 
+  // Redraw
+  useEffect(() => {
+    if (!joined) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    strokes.forEach((stroke) => {
+      stroke.forEach((line) => drawLine(ctx, line));
+    });
+  }, [strokes]);
+  
   const drawLine = (ctx, line) => {
     ctx.strokeStyle = line.color;
     ctx.lineWidth = line.size;
