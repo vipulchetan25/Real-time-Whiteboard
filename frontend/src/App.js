@@ -43,18 +43,21 @@ function App() {
   }, [joined]);
 
   // Redraw
-  useEffect(() => {
-    if (!joined) return;
+useEffect(() => {
+  if (!joined) return;
 
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext("2d");
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight - 90;
 
-    strokes.forEach((stroke) => {
-      stroke.forEach((line) => drawLine(ctx, line));
-    });
-  }, [strokes]);
+  socket.on("canvas-update", ({ strokes }) => {
+    setStrokes(strokes);
+  });
+
+  return () => socket.off("canvas-update");
+}, [joined]); // ✅ FIXED;
 
   const drawLine = (ctx, line) => {
     ctx.strokeStyle = line.color;
